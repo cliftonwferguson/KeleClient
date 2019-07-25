@@ -12,4 +12,8 @@ include HTTParty
   	  raise 'Invalide Credentials'
   	end
   end
+
+  def get_me
+  	response = self.class.get(url, headers: { "authorization" => @auth_token })
+  end  
 end
