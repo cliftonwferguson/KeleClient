@@ -1,4 +1,5 @@
 require 'HTTParty'
+require 'json'
 
 class Kele
 include HTTParty
@@ -15,5 +16,7 @@ include HTTParty
 
   def get_me
   	response = self.class.get("#{@base_uri}/users/me", headers: { "authorization" => @auth_token })
+  	obj = JSON.parse(response.body)
+  	p obj.class 
   end  
 end
