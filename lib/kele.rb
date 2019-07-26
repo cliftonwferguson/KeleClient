@@ -14,6 +14,6 @@ include HTTParty
   end
 
   def get_me
-  	response = self.class.get(url, headers: { "authorization" => @auth_token })
+  	response = self.class.get("#{@base_uri}/users/me", headers: { "authorization" => @auth_token })
   end  
 end
