@@ -25,6 +25,4 @@ include HTTParty
     response = self.class.get("#{@base_uri}/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
     availability = JSON.parse(response.body)["slots"]
   end
-
-
 end
