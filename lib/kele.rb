@@ -1,10 +1,13 @@
 require 'HTTParty'
 require 'json'
+require_relative 'roadmap'
 
 class Kele
 include HTTParty
+include Roadmap
 
 # mentor_id"=>2292457
+# chain_id"=>7019
 
   def initialize(username, password) 
   	@base_uri = "https://www.bloc.io/api/v1"
@@ -25,4 +28,5 @@ include HTTParty
     response = self.class.get("#{@base_uri}/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
     availability = JSON.parse(response.body)["slots"]
   end
+
 end
