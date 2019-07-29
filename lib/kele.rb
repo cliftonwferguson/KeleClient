@@ -1,8 +1,10 @@
 require 'HTTParty'
 require 'json'
+require_relative 'roadmap'
 
 class Kele
 include HTTParty
+include Roadmap
 
 # mentor_id"=>2292457
 # chain_id"=>7019
@@ -27,14 +29,7 @@ include HTTParty
     availability = JSON.parse(response.body)["slots"]
   end
   
-  def get_roadmap(chain_id)
-    response = self.class.get("#{@base_uri}/roadmaps/#{chain_id}", headers: { "authorization" => @auth_token })
-    roadmaps = JSON.parse(response.body)
-  end
 
-  def get_checkpoint(checkpoint_id)
-  	 response = self.class.get("#{@base_uri}/checkpoints/#{checkpoint_id}", headers: { "authorization" => @auth_token })
-     checkpoints = JSON.parse(response.body)
-  end
+
 
 end
