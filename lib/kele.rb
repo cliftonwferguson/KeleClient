@@ -29,4 +29,17 @@ include Roadmap
     availability = JSON.parse(response.body)["slots"]
   end
 
+  def get_messages(page = nil)
+  	 if page.nil?
+  	 response = self.class.get("#{@base_uri}/message_threads/", headers: { "authorization" => @auth_token })
+  	 else
+  	 response = self.class.get("#{@base_uri}/message_threads/", headers: { "authorization" => @auth_token }, body: {page: page})
+  	 end
+  	 messages = JSON.parse(response.body)
+  end
+
+  def create_message(username, recipient_id, stripped_text, subject = nil, token = nil) 
+     response = self.class.post("#{@base_uri}/messages/", headers: { "authorization" => @auth_token }, body: {"stripped-text": stripped_text, recipient_id: recipient_id, sender: username})
+  end
+
 end
