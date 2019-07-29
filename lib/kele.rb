@@ -42,4 +42,5 @@ include Roadmap
      response = self.class.post("#{@base_uri}/messages/", headers: { "authorization" => @auth_token }, body: {"stripped-text": stripped_text, recipient_id: recipient_id, sender: username})
   end
 
+
 end
