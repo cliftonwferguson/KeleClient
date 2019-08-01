@@ -38,8 +38,13 @@ include Roadmap
   	 messages = JSON.parse(response.body)
   end
 
-  def create_message(username, recipient_id, stripped_text, subject = nil, token = nil) 
-     response = self.class.post("#{@base_uri}/messages/", headers: { "authorization" => @auth_token }, body: {"stripped-text": stripped_text, recipient_id: recipient_id, sender: username})
+  def create_message(username, recipient_id, stripped_text, subject, token) 
+     resquest = self.class.post("#{@base_uri}/messages/",{
+     	headers: { "authorization" => @auth_token }, 
+     	body: {"stripped-text": stripped_text, 
+     	recipient_id: recipient_id, sender: username})}
+        request[:body][:subject] = subject if subject != nil
+        request[:body][:token] = token if token != nil
   end
 
 end
