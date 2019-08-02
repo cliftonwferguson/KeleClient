@@ -39,13 +39,22 @@ include Roadmap
   end
 
   def create_message(username, recipient_id, stripped_text, subject, token) 
+  	 body = {"stripped-text" => stripped_text,
+  	 	    recipient_id => recipient_id,
+  	 	    sender => username}
+
+  	 	   body[:subject] = subject if subject != nil
+           body[:token] = token if token != nil
+
      resquest = self.class.post("#{@base_uri}/messages/",{
      	headers: { "authorization" => @auth_token }, 
-     	body: {"stripped-text": stripped_text, 
-     	recipient_id: recipient_id, sender: username})}
-        request[:body][:subject] = subject if subject != nil
-        request[:body][:token] = token if token != nil
+     	body: body})
+        
   end
-
+  
+  def get_remaining_checkpoints(chain_id)
+  	request = self.class.get("#{@base_uri}/enrollment_chains/#{chain_id}/checkpoints_remaining_in_section", headers: { "authorization" => @auth_token })
+    remaining = JSON.parse(request.body)
+  end
 
 end
