@@ -8,6 +8,7 @@ include Roadmap
 
 # mentor_id"=>2292457
 # chain_id"=>7019
+#Mike id 2370372
 
   def initialize(username, password) 
   	@base_uri = "https://www.bloc.io/api/v1"
@@ -38,22 +39,22 @@ include Roadmap
   	 messages = JSON.parse(response.body)
   end
 
-  def create_message(username, recipient_id, stripped_text, subject, token) 
+  def create_message(username, recipient_id, stripped_text, subject = nil, token = nil) 
   	 body = {"stripped-text" => stripped_text,
-  	 	    recipient_id => recipient_id,
-  	 	    sender => username}
+  	 	    "recipient_id" => recipient_id,
+  	 	    "sender" => username}
 
   	 	   body[:subject] = subject if subject != nil
            body[:token] = token if token != nil
 
-     resquest = self.class.post("#{@base_uri}/messages/",{
+     response = self.class.post("#{@base_uri}/messages/",{
      	headers: { "authorization" => @auth_token }, 
      	body: body})
         
   end
   
   def get_remaining_checkpoints(chain_id)
-  	request = self.class.get("#{@base_uri}/enrollment_chains/#{chain_id}/checkpoints_remaining_in_section", headers: { "authorization" => @auth_token })
+  	response = self.class.get("#{@base_uri}/enrollment_chains/#{chain_id}/checkpoints_remaining_in_section", headers: { "authorization" => @auth_token })
     remaining = JSON.parse(request.body)
   end
 
