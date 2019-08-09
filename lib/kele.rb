@@ -50,7 +50,6 @@ include Roadmap
      response = self.class.post("#{@base_uri}/messages/",{
      	headers: { "authorization" => @auth_token }, 
      	body: body})
-        
   end
   
   def get_remaining_checkpoints(chain_id)
