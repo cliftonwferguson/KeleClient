@@ -1,4 +1,5 @@
 # KeleClient
 Ruby Gem
-Initial Commit
+
+Gem to interface with the Bloc API to retrieve student information. Information obtainable includes past messages and checkpoint completion. 
 
